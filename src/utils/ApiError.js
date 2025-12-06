@@ -10,6 +10,7 @@ class ApiError extends Error{
 
     }
 }
+export {ApiError};
 
 // ApiError: custom error class for APIs.
 // Extends Error and adds status code, message, success=false,

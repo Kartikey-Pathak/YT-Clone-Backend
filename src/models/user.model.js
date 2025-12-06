@@ -29,7 +29,7 @@ const userschema = new Schema({
         type: String,
         required: true
     },
-    coverimage: {
+    coverImage: {
         type: String,
     },
     watchhistory: [
@@ -45,13 +45,13 @@ const userschema = new Schema({
     refreshToken: {
         type: String
     }
-}, { timestamps })
+},{timestamps:true})
 
-userschema.pre("save", async function (next) {
-    if (!this.isModified("password")) return next();
+userschema.pre("save", async function () {
+    if (!this.isModified("password")) return;
 
-    this.password = bcrypt.hash(this.password, 10);
-    next();
+    this.password = await bcrypt.hash(this.password, 10);
+    
 })
 
 userschema.methods.isPasswordCorrect = async function (password) {
